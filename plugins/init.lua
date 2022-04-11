@@ -1,0 +1,16 @@
+return {
+   { "fatih/vim-go" },
+   { "https://tpope.io/vim/fugitive.git" },
+   { "thaerkh/vim-workspace" },
+   { "airblade/vim-gitgutter" },
+   { "scrooloose/nerdtree" },
+   { "vim-ctrlspace/vim-ctrlspace" },
+   { "ryanoasis/vim-devicons" },
+   { "hashivim/vim-terraform" },
+   { "mileszs/ack.vim" },
+   { "pearofducks/ansible-vim" },
+   { "troydm/easybuffer.vim" },
+   { "editorconfig/editorconfig-vim" },
+   { "preservim/nerdcommenter" },
+   { "junegunn/fzf.vim" },
+}
