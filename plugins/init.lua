@@ -13,4 +13,5 @@ return {
    { "editorconfig/editorconfig-vim" },
    { "preservim/nerdcommenter" },
    { "junegunn/fzf.vim" },
+   { "pearofducks/ansible-vim" },
 }
