@@ -1,44 +1,5 @@
--- Please check NvChad docs if you're totally new to nvchad + dont know lua!!
--- This is an example init file in /lua/custom/
--- this init.lua can load stuffs etc too so treat it like your ~/.config/nvim/
-
 -- MAPPINGS
 local map = require("core.utils").map
-
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-vim.opt.updatetime = 100
-vim.opt.ts  = 4
-vim.opt.sts = 4
-vim.opt.sw  = 4
-vim.opt.smartindent = true
-vim.opt.colorcolumn = "121"
-
--- For git and debug signs
-vim.opt.signcolumn="yes:2"
-vim.opt.cmdheight = 2
-
---colorscheme darcula
---highlight ColorColumn ctermbg=23 guibg=lightgrey
-vim.opt.foldmethod = "syntax"
-
--- CtrlSpace
---vim.opt.nocompatible = true -- NOT WORKING
-vim.opt.hidden = true
-vim.opt.encoding = "utf-8"
-vim.g.CtrlSpaceDefaultMappingKey = "<C-space> "
-
--- NerdTree
-vim.g.NERDTreeQuitOnOpen = 1
-vim.NERDTreeShowHidden   = 1
---[["autocmd vimenter * NERDTree
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd VimLeave * NERDTreeClose
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" Open the existing NERDTree on each new tab.
-autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
-]]--
 
 map("n", "<leader>cc", ":Telescope <CR>")
 map("n", "<leader>q", ":q <CR>")
@@ -72,7 +33,8 @@ vim.cmd([[
 
 vim.cmd([[
 filetype plugin on
-augroup FileType go noremap <F5> :GoBuild<CR> |
+augroup FileType go
+    noremap <F5> :GoBuild<CR> |
 	noremap <F17> :GoDebugStart |
 	noremap <F6> :GoRun |
 	noremap <F18> :GoRename<CR> |
@@ -89,6 +51,41 @@ augroup FileType go noremap <F5> :GoBuild<CR> |
  :GoDebugBreakpoint | (<F9>)
  :GoDebugNext       | (<F10>) 
  :GoDebugStep       | (<F11>).
+]]--
+
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.updatetime = 100
+vim.opt.ts  = 4
+vim.opt.sts = 4
+vim.opt.sw  = 4
+vim.opt.smartindent = true
+vim.opt.colorcolumn = "121"
+
+-- For git and debug signs
+vim.opt.signcolumn="yes:2"
+vim.opt.cmdheight = 2
+
+--colorscheme darcula
+--highlight ColorColumn ctermbg=23 guibg=lightgrey
+vim.opt.foldmethod = "syntax"
+
+-- CtrlSpace
+--vim.opt.nocompatible = true -- NOT WORKING
+vim.opt.hidden = true
+vim.opt.encoding = "utf-8"
+--vim.g.CtrlSpaceDefaultMappingKey = "<C-space> "
+
+-- NerdTree
+vim.g.NERDTreeQuitOnOpen = 1
+vim.NERDTreeShowHidden   = 1
+--[["autocmd vimenter * NERDTree
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd VimLeave * NERDTreeClose
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" Open the existing NERDTree on each new tab.
+autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
 ]]--
 
 -- Vim-Go

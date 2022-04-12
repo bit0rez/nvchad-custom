@@ -11,7 +11,6 @@ M.treesitter = {
       "rust",
       "yaml",
       "json",
-      "Dockerfile",
   },
 }
 
