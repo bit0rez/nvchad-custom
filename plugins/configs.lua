@@ -16,11 +16,22 @@ M.treesitter = {
 
 M.nvimtree = {
    git = {
+      hl = true,
       enable = true,
    },
    view = {
       side = "right",
-      width = 20,
+      width = 35,
+   },
+   show_icons = {
+        folders = 0,
+        files = 1,
+        folder_arrows = 1,
+   },
+   actions = {
+        open_file = {
+            quit_on_open = true,
+        },
    },
 }
 
