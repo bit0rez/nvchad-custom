@@ -14,4 +14,5 @@ return {
    { "preservim/nerdcommenter" },
    { "junegunn/fzf.vim" },
    { "pearofducks/ansible-vim" },
+   { "preservim/tagbar" },
 }
