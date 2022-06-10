@@ -1,31 +1,3 @@
--- MAPPINGS
-local map = require("core.utils").map
-
-map("n", "<leader>cc", ":Telescope <CR>")
-map("n", "<leader>q", ":q <CR>")
-
--- Tabs
-map("n", "tn", ":tabnext<CR>")
-map("n", "tp", ":tabprev<CR>")
-map("n", "tN", ":tabnew<CR>")
-map("n", "tc", ":tabclose<CR>")
-map("n", "tf", ":tabfirst<CR>")
-map("n", "tl", ":tablast<CR>")
-
--- Buffers
-map("n", "bf", ":Buffers<CR>")
-
--- Ctrl+Space for autocomplete
-map("i", "<C-Space>", "<C-x><C-o>")
-map("n", "<F3>", ":NERDTreeToggle<CR>")
-
--- Find files"
-map("n", "ff", ":Files<CR>")
-
--- Find word under cursor
-map("n", "<C-k>", ":Ag <C-r>=expand('<cword>')<CR><CR>")
---"nmap <C-K> :Ack <C-r>=expand('<cword>')<CR><CR>
-
 vim.cmd([[
   autocmd TermOpen * startinsert
     noremap <F2> :split<CR>:resize 20<CR>:terminal<CR>
@@ -49,7 +21,7 @@ augroup FileType go
 --[[ Vim-Go debug mappings
  :GoDebugContinue   | (<F5>)
  :GoDebugBreakpoint | (<F9>)
- :GoDebugNext       | (<F10>) 
+ :GoDebugNext       | (<F10>)
  :GoDebugStep       | (<F11>).
 ]]--
 

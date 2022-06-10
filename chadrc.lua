@@ -7,19 +7,20 @@ M.ui = {
    theme = "chadracula",
 }
 
-local userPlugins = require "custom.plugins" -- path to table
 local pluginConfs = require "custom.plugins.configs"
 
 M.plugins = {
-   install = userPlugins,
-   default_plugin_config_replace = {
+   user = require "custom.plugins",
+   override = {
       nvim_treesitter = pluginConfs.treesitter,
       nvim_tree = pluginConfs.nvimtree,
    },
 }
 
-lspconfig = require "lspconfig"
-util = require "lspconfig/util"
+M.mappings = require "custom.mappings"
+
+local lspconfig = require "lspconfig"
+local util = require "lspconfig/util"
 
 lspconfig.gopls.setup {
     cmd = {"gopls", "serve"},
@@ -34,5 +35,7 @@ lspconfig.gopls.setup {
       },
     },
 }
+
+M.lspconfig = lspconfig
 
 return M
