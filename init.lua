@@ -25,6 +25,9 @@ augroup FileType go
  :GoDebugStep       | (<F11>).
 ]]--
 
+vim.cmd([[
+set notitle
+]])
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.updatetime = 100
@@ -84,7 +87,7 @@ vim.g.go_highlight_variable_declarations = 1
 vim.g.go_highlight_variable_assignments = 1
 vim.g.go_doc_balloon = 1
 vim.g.go_doc_popup_window = 1
-vim.g.go_fold_enable = {"block", "import", "varconst", "package_comment"}
+vim.g.go_fold_enable = {} -- {"block", "import", "varconst", "package_comment"}
 
 -- Nerd commenter
 -- Create default mappings
