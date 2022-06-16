@@ -37,6 +37,15 @@ vim.opt.sw  = 4
 vim.opt.smartindent = true
 vim.opt.colorcolumn = "121"
 
+vim.cmd([[
+augroup FileType protobuf
+    set expandtab
+    set ts=2
+    set sts=2
+    set sw=2
+]])
+
+
 -- For git and debug signs
 vim.opt.signcolumn="yes:2"
 vim.opt.cmdheight = 2
