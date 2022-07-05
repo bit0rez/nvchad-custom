@@ -1,5 +1,5 @@
 return {
-   [ "fatih/vim-go" ] = {}, 
+   [ "fatih/vim-go" ] = {},
    [ "https://tpope.io/vim/fugitive.git" ] = {},
    [ "thaerkh/vim-workspace" ] = {},
    [ "airblade/vim-gitgutter" ] = {},
@@ -14,5 +14,7 @@ return {
    [ "junegunn/fzf.vim" ] = {},
    [ "pearofducks/ansible-vim" ] = {},
    [ "preservim/tagbar" ] = {},
+   [ "KeitaNakamura/neodark.vim" ] = {},
+   [ "doums/darcula" ] = {},
 }
 

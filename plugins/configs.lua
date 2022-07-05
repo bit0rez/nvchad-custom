@@ -11,6 +11,7 @@ M.treesitter = {
       "rust",
       "yaml",
       "json",
+      "python",
   },
 }
 
