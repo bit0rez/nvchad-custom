@@ -6,15 +6,13 @@ vim.cmd([[
 vim.cmd([[
 filetype plugin on
 augroup FileType go
-    noremap <F5> :GoBuild<CR> |
+  noremap <F5> :GoBuild<CR> |
 	noremap <F17> :GoDebugStart |
 	noremap <F6> :GoRun |
 	noremap <F18> :GoRename<CR> |
 	noremap <F7> :GoTest<CR> |
 	noremap <F19> :GoDebugTest<CR> |
 	noremap <F9> :GoDebugBreakpoint<CR> |
-	noremap <C-l> :GoReferrers<CR> | 
-	noremap <C-L> :GoReferrers<CR> |
 	set completeopt-=preview
 ]])
 
@@ -28,6 +26,7 @@ augroup FileType go
 vim.cmd([[
 set notitle
 ]])
+
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.updatetime = 100

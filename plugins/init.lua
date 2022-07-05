@@ -7,11 +7,18 @@ return {
    [ "vim-ctrlspace/vim-ctrlspace" ] = {},
    [ "ryanoasis/vim-devicons" ] = {},
    [ "hashivim/vim-terraform" ] = {},
-   [ "mileszs/ack.vim" ] = {},
+   [ "mileszs/ack.vim" ] = { cmd = {"Ack"} },
    [ "troydm/easybuffer.vim" ] = {},
    [ "editorconfig/editorconfig-vim" ] = {},
    [ "preservim/nerdcommenter" ] = {},
-   [ "junegunn/fzf.vim" ] = {},
+   [ "junegunn/fzf.vim" ] = {
+     cmd = {
+       "Files",
+       "Ag",
+       "Buffers",
+       "fzf"
+     }
+   },
    [ "pearofducks/ansible-vim" ] = {},
    [ "preservim/tagbar" ] = {},
    [ "KeitaNakamura/neodark.vim" ] = {},

@@ -6,7 +6,7 @@ M.general = {
         ["<C-Space>"] = { "<C-x><C-o>", "Autocomplete by Ctrl-Space" },
     },
     n = {
-        --["<leader>cc"] = {"<cmd> Telescope <CR>"},
+        ["<leader>cc"] = {"<cmd> Telescope <CR>"},
         --["<leader>q"] = {"<cmd> q <CR>"},
 
         -- Tabs
@@ -21,28 +21,18 @@ M.general = {
         ["<F3>"] = { "<cmd> NERDTreeToggle <CR>", "Toggle NERDTree" },
 
         -- Find files"
-        ["ff"] = { "<cmd> Files <CR>", "Find files" },
+        ["ff"] = { "<cmd> Telescope find_files <CR>", "Find files" },
 
         -- Buffers
-        ["bf"] = { "<cmd> Buffers <CR>", "Show\\Find buffers" },
+        ["fb"] = { "<cmd> Telescope buffers <CR>", "Show\\Find buffers" },
+
+        ["fg"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
 
         -- Find word under cursor
-        --["<C-k>"] = { "<cmd> Ag <C-r>=expand('<cword>')<CR><CR>", "Find word under cursor" },
-        --"nmap <C-K> :Ack <C-r>=expand('<cword>'}<CR><CR>
-        ["<C-k>"] = {
-            function()
-                local current_word = vim.call('expand','<cword>')
-                vim.cmd("Ag " .. current_word)
-            end,
-            "Find word under cursor"
-        },
-        ["<leader>k"] = {
-            function()
-                local current_word = vim.call('expand','<cword>')
-                vim.cmd("Ack " .. current_word)
-            end,
-            "Find word under cursor"
-        },
+        ["<C-k>"] = { "<cmd> Telescope grep_string <CR>", "Find word under cursor" },
+
+        -- Go
+        ["<C-l>"] = { "<cmd> GoReferrers<CR>", "Find word under cursor" },
     }
 }
 
