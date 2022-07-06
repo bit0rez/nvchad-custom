@@ -11,17 +11,8 @@ return {
    [ "troydm/easybuffer.vim" ] = {},
    [ "editorconfig/editorconfig-vim" ] = {},
    [ "preservim/nerdcommenter" ] = {},
-   [ "junegunn/fzf.vim" ] = {
-     cmd = {
-       "Files",
-       "Ag",
-       "Buffers",
-       "fzf"
-     }
-   },
    [ "pearofducks/ansible-vim" ] = {},
    [ "preservim/tagbar" ] = {},
    [ "KeitaNakamura/neodark.vim" ] = {},
-   [ "doums/darcula" ] = {},
 }
 
