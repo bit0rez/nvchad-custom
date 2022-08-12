@@ -8,6 +8,8 @@ M.ui = {
 local lspconfig = require "lspconfig"
 local util = require "lspconfig/util"
 
+require 'lspconfig'.gopls.setup{}
+
 lspconfig.gopls.setup {
   cmd = {"gopls", "serve"},
   filetypes = {"go", "gomod"},
@@ -38,10 +40,15 @@ lspconfig.jedi_language_server.setup {
 local pluginConfs = require "custom.plugins.configs"
 M.plugins = {
   user = require "custom.plugins",
-   override = {
+  override = {
       ["nvim-treesitter/nvim-treesitter"] = pluginConfs.treesitter,
       ["kyazdani42/nvim-tree.lua"] = pluginConfs.nvimtree,
-   }
+  },
+  options = {
+    lspconfig = {
+      setup_lspconf = "custom.plugins.lspconfig",
+    },
+  },
 }
 
 M.mappings = require "custom.mappings"

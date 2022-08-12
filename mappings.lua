@@ -33,6 +33,7 @@ M.general = {
 
         -- Go
         ["<C-l>"] = { "<cmd> GoReferrers<CR>", "Find word under cursor" },
+        ["<F18"] = {"<cmd> GoRename<CR>", "GoRename"},
     }
 }
 
