@@ -1,17 +1,52 @@
-local M = {}
+local on_attach = require("plugins.configs.lspconfig").on_attach
+local capabilities = require("plugins.configs.lspconfig").capabilities
 
-M.setup_lsp = function(attach, capabilities)
-   local lspconfig = require "lspconfig"
+local util = require "lspconfig/util"
+local lspcfg = require "lspconfig"
+local configs = require "lspconfig/configs"
+local servers = { "clangd", "brief", "cmake", "rust_analyzer", "pylsp", "sqls", "terraformls", "tsserver" }
 
-   -- lspservers with default config
-   local servers = { "clangd", "gopls", "rust_analyzer" }
+configs.brief = {
+  default_config = {
+    cmd = {"/home/bit0rez/bin/brief-lsp"},
+    filetypes = {"brief"},
+    root_dir = util.root_pattern(".git"),
+    settings = {},
+  },
+}
 
-   for _, lsp in ipairs(servers) do
-      lspconfig[lsp].setup {
-         on_attach = attach,
-         capabilities = capabilities,
-      }
-   end
+
+for _, lsp in ipairs(servers) do
+  lspcfg[lsp].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
 end
 
-return M
+lspcfg.gopls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = {"gopls", "serve"},
+  filetypes = {"go", "gomod"},
+  root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+  settings = {
+    gopls = {
+      analyses = {
+        nilness = true,
+        shadow = true,
+        unusedparams = true,
+        unusedwrite = true,
+        unusedvariable = true,
+      },
+      ["formatting.gofumpt"] = true,
+      staticcheck = true,
+    },
+  },
+}
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+        virtual_text = false
+    }
+)
+
