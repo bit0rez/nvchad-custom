@@ -18,16 +18,20 @@ M.general = {
         ["tf"] = { "<cmd> tabfirst <CR>", "Goto first tab" },
         ["tl"] = { "<cmd> tablast <CR>", "Goto last tab" },
 
-        -- Find files"
+        -- Find files
         ["ff"] = { "<cmd> Telescope find_files <CR>", "Find files" },
 
         -- Buffers
         ["fb"] = { "<cmd> Telescope buffers <CR>", "Show\\Find buffers" },
 
+        -- Find in files
         ["fg"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
 
         -- Find word under cursor
         ["<C-k>"] = { "<cmd> Telescope grep_string <CR>", "Find word under cursor" },
+
+        -- Tagbar
+        ["tt"] = { "<cmd> TagbarToggle <CR>", "Tagbar toggle" },
 
         -- LSP
         ["<C-l>"] = {
@@ -53,7 +57,7 @@ M.general = {
         },
         ["<leader>f"] = {
           function ()
-            vim.lsp.buf.formatting()
+            vim.lsp.buf.format({async = true})
           end,
           "Format",
           opts,

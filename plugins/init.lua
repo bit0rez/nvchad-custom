@@ -1,11 +1,36 @@
 return {
-  -- [ "fatih/vim-go" ] = {},
   [ "https://tpope.io/vim/fugitive.git" ] = {},
-  -- [ "thaerkh/vim-workspace" ] = {},
+  [ "rmagatti/auto-session" ] = {
+    config = function()
+      require("auto-session").setup {
+        log_level = "error",
+        auto_session_suppress_dirs = {
+          "~/", "~/work", "~/Downloads", "/", "~/src", "~/*"
+        },
+      }
+    end
+  },
+  [ "aklt/plantuml-syntax" ] = {},
+  [ "ellisonleao/glow.nvim" ] = {
+    config = function ()
+      require("glow").setup()
+    end
+  },
+  [ "edluffy/hologram.nvim" ] = {},
+  -- ["https://github.com/rmagatti/session-lens" ] = {},
+  [ "javiorfo/nvim-soil" ] = { 
+    config = function ()
+      require "custom.plugins.config.nvimsoil"
+    end
+  },
   [ "natecraddock/workspaces.nvim" ] = {},
-  [ "natecraddock/sessions.nvim" ] = {},
+  [ "natecraddock/sessions.nvim" ] = {
+    config = function()
+      local config = require "custom.plugins.config.sessions"
+      require('sessions').setup(config)
+    end
+  },
   [ "vim-ctrlspace/vim-ctrlspace" ] = {},
-  [ "mileszs/ack.vim" ] = { cmd = {"Ack"} },
   [ "troydm/easybuffer.vim" ] = {},
   [ "editorconfig/editorconfig-vim" ] = {},
   [ "preservim/tagbar" ] = {},
@@ -16,10 +41,19 @@ return {
       require "custom.plugins.lspconfig"
     end,
   },
-  [ "mfussenegger/nvim-dap" ] = {},
+  [ "mfussenegger/nvim-dap" ] = {
+    config = function()
+      require "custom.plugins.config.dap"
+    end,
+  },
   [ "rcarriga/nvim-dap-ui" ] = {},
   [ "leoluz/nvim-dap-go" ] = {},
-  [ "jose-elias-alvarez/null-ls.nvim" ] = {},
+  [ "jose-elias-alvarez/null-ls.nvim" ] = {
+    config = function()
+      local config = require "custom.plugins.config.nullls"
+      require('null-ls').setup(config)
+    end
+  },
   -- Brief syntax addon
   [ "ssh://git@stash.msk.avito.ru:7999/~iamerkulov/brief-vim.git" ] = {},
 }

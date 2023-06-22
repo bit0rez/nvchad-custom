@@ -2,19 +2,45 @@ local on_attach = require("plugins.configs.lspconfig").on_attach
 local capabilities = require("plugins.configs.lspconfig").capabilities
 
 local util = require "lspconfig/util"
+local configs = require "lspconfig.configs"
 local lspcfg = require "lspconfig"
-local configs = require "lspconfig/configs"
-local servers = { "clangd", "brief", "cmake", "rust_analyzer", "pylsp", "sqls", "terraformls", "tsserver" }
+local servers = { "ansiblels", "tflint", "clangd", "brief", "cmake", "rust_analyzer", "puppet", "pylsp", "regols", "sqls", "terraformls", "tsserver" }
 
 configs.brief = {
   default_config = {
-    cmd = {"/home/bit0rez/bin/brief-lsp"},
+    cmd = {"brief-lsp", "-logs", "/tmp/brief-lsp.log"},
     filetypes = {"brief"},
-    root_dir = util.root_pattern(".git"),
+    root_dir = util.root_pattern(".git", "brief"),
     settings = {},
+  },
+  docs = {
+    description = [[
+    http://stash.msk.avito.ru/projects/GL/repos/brief-lsp
+    Language Server Protocol for Brief.
+    ]],
+    default_config = {
+      root_dir = [[root_pattern(".git")]],
+    },
   },
 }
 
+configs.regols = {
+  default_config = {
+    cmd = {'regols'},
+    filetypes = { 'rego' },
+    root_dir = util.root_pattern(".git"),
+    settings = {}
+  },
+  docs = {
+    description = [[
+    https://github.com/kitagry/regols
+    Language Server for OPA Rego.
+    ]],
+    default_config = {
+      root_dir = [[root_pattern(".git")]],
+    },
+  },
+}
 
 for _, lsp in ipairs(servers) do
   lspcfg[lsp].setup {
@@ -45,8 +71,8 @@ lspcfg.gopls.setup {
 }
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = false
-    }
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = false
+  }
 )
 
