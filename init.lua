@@ -10,9 +10,9 @@ vim.opt.syntax = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.updatetime = 100
-vim.opt.ts  = 4
-vim.opt.sts = 4
-vim.opt.sw  = 4
+vim.opt.ts  = 2
+vim.opt.sts = 2
+vim.opt.sw  = 2
 vim.opt.smartindent = true
 vim.opt.colorcolumn = "121"
 
@@ -33,8 +33,5 @@ vim.opt.foldlevel  = 99
 vim.cmd([[
 augroup FileType protobuf
     set expandtab
-    set ts=2
-    set sts=2
-    set sw=2
 ]])
 
