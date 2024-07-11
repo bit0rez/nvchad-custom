@@ -16,9 +16,31 @@ return {
       require("glow").setup()
     end
   },
-  [ "edluffy/hologram.nvim" ] = {},
+  [ "edluffy/hologram.nvim" ] = {
+    config = function ()
+      require('hologram').setup({
+        auto_display = true -- WIP automatic markdown image display, may be prone to breaking
+      })
+    end
+  },
+  ['https://gitlab.com/itaranto/plantuml.nvim'] = {
+    config = function()
+      require('plantuml').setup(
+        {
+          renderer = {
+            type = 'image',
+            options = {
+              prog = 'feh',
+              dark_mode = false,
+            }
+          },
+          render_on_write = true,
+        }
+      )
+    end
+  },
   -- ["https://github.com/rmagatti/session-lens" ] = {},
-  [ "javiorfo/nvim-soil" ] = { 
+  [ "javiorfo/nvim-soil" ] = {
     config = function ()
       require "custom.plugins.config.nvimsoil"
     end

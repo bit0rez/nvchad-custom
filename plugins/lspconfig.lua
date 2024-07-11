@@ -4,22 +4,31 @@ local capabilities = require("plugins.configs.lspconfig").capabilities
 local util = require "lspconfig/util"
 local configs = require "lspconfig.configs"
 local lspcfg = require "lspconfig"
-local servers = { "ansiblels", "tflint", "clangd", "brief", "cmake", "rust_analyzer", "puppet", "pylsp", "regols", "sqls", "terraformls", "tsserver" }
+local servers = { "ansiblels", "tflint", "clangd", "briefls", "cmake", "rust_analyzer", "puppet", "pylsp", "regols", "sqls", "lua_ls", "terraformls", "tsserver", "yamlls" }
 
-configs.brief = {
+configs.briefls = {
   default_config = {
-    cmd = {"brief-lsp", "-logs", "/tmp/brief-lsp.log"},
+    cmd = {"briefls"},
     filetypes = {"brief"},
-    root_dir = util.root_pattern(".git", "brief"),
-    settings = {},
+    root_dir = function(fname)
+      return util.root_pattern("brief", ".git")(fname)
+    end,
+    single_file_support = true,
+    capabilities = {
+      workspace = {
+        didChangeWatchedFiles = {
+          dynamicRegistration = true,
+        },
+      },
+    },
   },
   docs = {
     description = [[
-    http://stash.msk.avito.ru/projects/GL/repos/brief-lsp
+    https://stash.msk.avito.ru/projects/GL/repos/briefls/browse
     Language Server Protocol for Brief.
     ]],
     default_config = {
-      root_dir = [[root_pattern(".git")]],
+      root_dir = [[root_pattern("brief",".git")]],
     },
   },
 }
@@ -53,6 +62,7 @@ lspcfg.gopls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   cmd = {"gopls", "serve"},
+  cmd_env = { GOPROXY = "https://goproxy.msk.avito.ru|https://proxy.golang.org,direct"},
   filetypes = {"go", "gomod"},
   root_dir = util.root_pattern("go.work", "go.mod", ".git"),
   settings = {
@@ -69,6 +79,14 @@ lspcfg.gopls.setup {
     },
   },
 }
+
+lspcfg.briefls.setup({
+    on_attach = lsp_attach,
+    flags = {
+        debounce_text_changes = 150,
+    },
+    capabilities = capabilities,
+})
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
