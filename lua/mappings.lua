@@ -1,8 +1,17 @@
-local M = {}
+require "nvchad.mappings"
+
+-- add yours here
+
+local map = vim.keymap.set
+
+map("n", ";", ":", { desc = "CMD enter command mode" })
+map("i", "jk", "<ESC>")
+
+-- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
 local opts = { noremap=true, silent=true }
 
-M.general = {
+local M = {
     i = {
         -- Ctrl+Space for autocomplete
         ["<C-Space>"] = { "<C-x><C-o>", "Autocomplete by Ctrl-Space" },
@@ -67,6 +76,13 @@ M.general = {
             vim.lsp.buf.definition()
           end,
           "LSP go to definition",
+          opts,
+        },
+        ["gi"] = {
+          function ()
+            vim.lsp.buf.implementation()
+          end,
+          "LSP go to implementation",
           opts,
         },
 
@@ -146,4 +162,6 @@ M.general = {
     }
 }
 
-return M
+for m, params in pairs(M.n) do
+  map("n", m, params[1])
+end

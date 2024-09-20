@@ -1,11 +1,31 @@
-local on_attach = require("plugins.configs.lspconfig").on_attach
-local capabilities = require("plugins.configs.lspconfig").capabilities
+-- load defaults i.e lua_lsp
+require("nvchad.configs.lspconfig").defaults()
+
+local lspconfig = require "lspconfig"
+
+-- EXAMPLE
+local servers = { "html", "cssls", "gopls", "ansiblels", "tflint", "clangd", "cmake", "rust_analyzer", "puppet", "pylsp", "regols", "sqls", "lua_ls", "terraformls", "tsserver", "yamlls"}
+local nvlsp = require "nvchad.configs.lspconfig"
+
+-- lsps with default config
+for _, lsp in ipairs(servers) do
+  lspconfig[lsp].setup {
+    on_attach = nvlsp.on_attach,
+    on_init = nvlsp.on_init,
+    capabilities = nvlsp.capabilities,
+  }
+end
+
+-- configuring single server, example: typescript
+-- lspconfig.tsserver.setup {
+--   on_attach = nvlsp.on_attach,
+--   on_init = nvlsp.on_init,
+--   capabilities = nvlsp.capabilities,
+-- }
+--
 
 local util = require "lspconfig/util"
 local configs = require "lspconfig.configs"
-local lspcfg = require "lspconfig"
-local servers = { "ansiblels", "tflint", "clangd", "briefls", "cmake", "rust_analyzer", "puppet", "pylsp", "regols", "sqls", "lua_ls", "terraformls", "tsserver", "yamlls" }
-
 configs.briefls = {
   default_config = {
     cmd = {"briefls"},
@@ -33,32 +53,16 @@ configs.briefls = {
   },
 }
 
-configs.regols = {
-  default_config = {
-    cmd = {'regols'},
-    filetypes = { 'rego' },
-    root_dir = util.root_pattern(".git"),
-    settings = {}
-  },
-  docs = {
-    description = [[
-    https://github.com/kitagry/regols
-    Language Server for OPA Rego.
-    ]],
-    default_config = {
-      root_dir = [[root_pattern(".git")]],
+lspconfig.briefls.setup({
+    on_attach = nvlsp.on_attach,
+    on_init = nvlsp.on_init,
+    flags = {
+        debounce_text_changes = 150,
     },
-  },
-}
+    capabilities = nvlsp.capabilities,
+})
 
-for _, lsp in ipairs(servers) do
-  lspcfg[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
-end
-
-lspcfg.gopls.setup {
+lspconfig.gopls.setup({
   on_attach = on_attach,
   capabilities = capabilities,
   cmd = {"gopls", "serve"},
@@ -78,19 +82,4 @@ lspcfg.gopls.setup {
       staticcheck = true,
     },
   },
-}
-
-lspcfg.briefls.setup({
-    on_attach = lsp_attach,
-    flags = {
-        debounce_text_changes = 150,
-    },
-    capabilities = capabilities,
 })
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = false
-  }
-)
-

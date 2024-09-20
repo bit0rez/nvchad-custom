@@ -1,37 +1,37 @@
-vim.cmd([[
-set notitle
-]])
+vim.g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
+vim.g.mapleader = " "
 
--- DAP signs
-vim.fn.sign_define('DapBreakpoint', {text='B', texthl='Difftext', linehl='', numhl=''})
-vim.fn.sign_define('DapBreakpointCondition', {text='C', texthl='Difftext', linehl='', numhl=''})
+-- bootstrap lazy and all plugins
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
-vim.opt.syntax = true
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-vim.opt.updatetime = 100
-vim.opt.ts  = 2
-vim.opt.sts = 2
-vim.opt.sw  = 2
-vim.opt.smartindent = true
-vim.opt.colorcolumn = "121"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local repo = "https://github.com/folke/lazy.nvim.git"
+  vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
+end
 
--- For git and debug signs
-vim.opt.signcolumn="yes:2"
-vim.opt.cmdheight = 2
-vim.opt.hidden = true
-vim.opt.encoding = "utf-8"
+vim.opt.rtp:prepend(lazypath)
 
--- Folding
-vim.opt.foldmethod = "syntax"
-vim.opt.foldlevel  = 99
+local lazy_config = require "configs.lazy"
 
--- Spell check
--- vim.opt.spell = true
--- vim.opt.spelllang = "en_us,ru_ru"
+-- load plugins
+require("lazy").setup({
+  {
+    "NvChad/NvChad",
+    lazy = false,
+    branch = "v2.5",
+    import = "nvchad.plugins",
+  },
 
-vim.cmd([[
-augroup FileType protobuf
-    set expandtab
-]])
+  { import = "plugins" },
+}, lazy_config)
 
+-- load theme
+dofile(vim.g.base46_cache .. "defaults")
+dofile(vim.g.base46_cache .. "statusline")
+
+require "options"
+require "nvchad.autocmds"
+
+vim.schedule(function()
+  require "mappings"
+end)
