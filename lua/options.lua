@@ -34,11 +34,15 @@ vim.opt.foldmethod = "syntax"
 vim.opt.foldlevel  = 99
 
 -- Spell check
--- vim.opt.spell = true
--- vim.opt.spelllang = "en_us,ru_ru"
+vim.opt.spell = true
+vim.opt.spelllang = "en_us,ru_ru"
 
 vim.cmd([[
 augroup FileType protobuf
     set expandtab
 ]])
-
+vim.filetype.add({
+  extension = {
+    ['http'] = 'http',
+  },
+})

@@ -84,6 +84,9 @@ return {
     "rcarriga/nvim-dap-ui",
   },
   {
+    "theHamsta/nvim-dap-virtual-text",
+  },
+  {
     "ray-x/go.nvim",
     dependencies = { -- optional packages
       "ray-x/guihua.lua",
@@ -114,5 +117,32 @@ return {
     config = function()
       require('navigator').setup()
     end,
-  }
+    lazy = true,
+  },
+  {
+    'mistweaverco/kulala.nvim',
+    opts = {},
+    lazy = false
+  },
+  {
+    "kndndrj/nvim-dbee",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+    },
+    build = function()
+      -- Install tries to automatically detect the install method.
+      -- if it fails, try calling it with one of these parameters:
+      --    "curl", "wget", "bitsadmin", "go"
+      require("dbee").install()
+    end,
+    config = function()
+      require("dbee").setup(--[[optional config]])
+    end,
+    lazy = false,
+  },
+  {
+    "ravibrock/spellwarn.nvim",
+    event = "VeryLazy",
+    config = true,
+  },
 }
