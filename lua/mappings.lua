@@ -17,7 +17,17 @@ local M = {
         ["<C-Space>"] = { "<C-x><C-o>", "Autocomplete by Ctrl-Space" },
     },
     n = {
+        ["<leader>gg"] = {"<cmd> Git <CR>"},
+        ["<leader>jj"] = {"<cmd> JJ <CR>"},
         ["<leader>cc"] = {"<cmd> Telescope <CR>"},
+        ["<leader>cp"] = {
+          function ()
+            vim.fn.setreg('+', vim.fn.expand('%:.'))
+            print("Относительный путь скопирован: " .. vim.fn.expand('%:.'))
+          end,
+          "Copy buf ref path",
+          opts,
+        },
 
         -- Tabs
         ["tn"] = { "<cmd> tabnext <CR>", "Goto next tab" },

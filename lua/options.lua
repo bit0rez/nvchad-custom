@@ -9,6 +9,8 @@ vim.cmd([[
 set notitle
 ]])
 
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
 -- DAP signs
 vim.fn.sign_define('DapBreakpoint', {text='B', texthl='Difftext', linehl='', numhl=''})
 vim.fn.sign_define('DapBreakpointCondition', {text='C', texthl='Difftext', linehl='', numhl=''})
@@ -34,8 +36,8 @@ vim.opt.foldmethod = "syntax"
 vim.opt.foldlevel  = 99
 
 -- Spell check
-vim.opt.spell = true
-vim.opt.spelllang = "en_us,ru_ru"
+-- vim.opt.spell = true
+-- vim.opt.spelllang = "en_us,ru_ru"
 
 vim.cmd([[
 augroup FileType protobuf
